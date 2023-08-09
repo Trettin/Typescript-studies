@@ -25,12 +25,19 @@ type Numeric = number | boolean;
 
 type Universal = Combinable & Numeric;
 
-// Type guard
-function add(a: Combinable, b: Combinable) {
-  if (typeof a === 'string' || typeof b === 'string') {
-    return a.toString() + b.toString();
+// Function overload
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: string, b: string, c: string): string;
+function add(a: number, b: number, c: number): number;
+function add(a: Combinable, b: Combinable, c?: Combinable) {
+  // Type guard
+  c = c || (typeof a === 'string' || typeof b === 'string' ? '' : 0);
+
+  if (typeof a === 'string' || typeof b === 'string' || typeof c === 'string') {
+    return a.toString() + b.toString() + c.toString();
   }
-  return a + b;
+  return a + b + c;
 }
 
 type UnknownEmployee = Employee | Admin;
