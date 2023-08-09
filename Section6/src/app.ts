@@ -104,3 +104,12 @@ function moveAnimal(animal: Animal) {
 }
 
 moveAnimal({type: 'bird', flyingSpeed: 10});
+
+interface ErrorContainer {
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: 'Not valid email',
+  username: 'Must start with a capital character'
+}
