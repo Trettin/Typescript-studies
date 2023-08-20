@@ -15,4 +15,11 @@ function countAndDescribe<T extends Lentghty>(element: T): [T, string] {
   return [element, description];
 }
 
-console.log(countAndDescribe('t2'))
+function extractAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+  ) {
+    return 'Value: ' + obj[key];
+}
+
+console.log(extractAndConvert({name: 'Gabriel'}, 'name'));
