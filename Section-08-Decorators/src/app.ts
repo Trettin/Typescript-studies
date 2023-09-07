@@ -42,11 +42,39 @@ function Log(target: any, propName: string) {
   console.log('Property name: ', propName);
   console.log('Property constructor', target);
 }
+
+function Log2(target: any, name: string, descripor: PropertyDescriptor) {
+  console.log('Acessor decorator!');
+  console.log(target);
+  console.log(name);
+  console.log(descripor);
+}
+
+function Log3(target: any, name: string | Symbol, descripor: PropertyDescriptor) {
+  console.log('Method decorator!');
+  console.log(target);
+  console.log(name);
+  console.log(descripor);
+}
+
+/**
+ * @param target 
+ * @param name Name of the function
+ * @param argPosition 
+ */
+function Log4(target: any, name: string | Symbol, argPosition: number) {
+  console.log('Parameter decorator!');
+  console.log(target);
+  console.log(name);
+  console.log(argPosition);
+}
+
 class Product {
   @Log
   title: string;
   private _price: number;
 
+  @Log2
   set price(val: number) {
     if (val > 0) {
       this._price = val;
@@ -60,7 +88,8 @@ class Product {
     this.price = p;
   }
 
-  getPriceWithTax(tax: number) {
+  @Log3
+  getPriceWithTax(@Log4 tax: number) {
     return this._price * (1 + tax);
   }
 }
